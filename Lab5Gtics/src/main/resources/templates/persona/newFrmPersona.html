@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>
+        <title>Nuevo Registro</title>
+    </head>
+    <body>
+        <main>
+            <div th:class="container">
+                <ul class="nav justify-content-end">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" th:href="@{/viaje}">Viajes</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/mascota}">Mascotas</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/persona}">Persona</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="container px-4 py-5">
+                <h1 class="pb-2 mb-3 border-bottom">Nuevo Registro</h1>
+
+                <form method="post" th:action="@{/persona/save}" class="mt-2">
+                    <div class="mb-3">
+                        <label for="nombre" class="form-label">Nombre completo</label>
+                        <input type="text" class="form-control" name="nombre" id="nombre">
+                    </div>
+                    <div class="mb-3">
+                        <label for="dni" class="form-label">DNI</label>
+                        <input type="number" class="form-control" name="dni" id="dni">
+                    </div>
+                    <div class="mb-3">
+                        <label for="celular" class="form-label">Celular</label>
+                        <input type="number" class="form-control" name="celular" id="celular">
+                    </div>
+
+
+                    <div class="mb-3">
+                        <label for="tipoPersona" class="form-label">Selector de Personas</label>
+                        <select class="form-select" name="tipoPersona" id="tipoPersona">
+                            <option th:each="personas: ${listaPersonas}"
+                                    th:text="${personas.nombre}" th:value="${personas.id}">Open this select menu</option>
+                        </select>
+                    </div>
+
+
+                    <a th:href="@{/persona}" class="btn btn-danger">Cancelar</a>
+                    <button type="submit" class="btn btn-primary">Registrar</button>
+                </form>
+            </div>
+        </main>
+        <script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+    </body>
+</html>
