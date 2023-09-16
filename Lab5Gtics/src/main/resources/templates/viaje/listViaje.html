@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>
+        <link rel="stylesheet" th:href="@{/bootstrap-icons/bootstrap-icons.css}"/>
+        <title>Lista de viajes</title>
+    </head>
+    <body>
+        <main>
+            <div th:class="container">
+                <ul class="nav justify-content-end">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" th:href="@{/viaje}">Viajes</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/mascota}">Mascotas</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/lugar}">Lugares</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="container px-4 py-5">
+                <h1 class="pb-2 border-bottom">Lista de viajes programados</h1>
+                <div class="d-flex mt-3 mb-4">
+                    <a class="btn btn-primary" th:href="@{'/viaje/newForm'}">Nuevo viaje</a>
+                    <a class="btn btn-secondary ms-auto" th:href="@{'/'}">Regresar</a>
+                </div>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Punto de recojo</th>
+                            <th>Cant. Personas</th>
+                            <th>Cant. Perros</th>
+                            <th>Persona</th>
+                            <th>Lugar</th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="viajes, info : ${listaViajes}">
+                            <td th:text="${info.index + 1}"></td>
+                            <td th:text="${viajes.puntoRecojo}"></td>
+                            <td th:text="${viajes.cantPersonas}"></td>
+                            <td th:text="${viajes.cantPerros}"></td>
+                            <td th:text="${viajes.personaIdpersona.nombre}"></td>
+                            <td th:text="${viajes.lugaresIdlugares.nombreLugar}"></td>
+
+                            <td><a class="btn btn-primary"
+                                   th:href="@{'/viaje/edit?id=' + ${viajes.id}}"><i class="bi bi-pencil-square"></i></a>
+                            </td>
+                            <td><a class="btn btn-danger"
+                                   th:href="@{'/viaje/delete?id=' + ${viajes.id}}"><i class="bi bi-trash3"></i></a>
+                            </td>
+                            <td><a class="btn btn-success"
+                                   th:href="@{'/viaje/otro?id=' + ${viajes.id}}"><i class="bi bi-file-plus"></i></a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </main>
+        <script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+    </body>
+</html>

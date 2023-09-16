@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" th:href="@{/bootstrap-icons/bootstrap-icons.css}"/>
+    <title>Lista de Mascotas</title>
+</head>
+<body>
+<main>
+    <div th:class="container">
+        <ul class="nav justify-content-end">
+            <li class="nav-item">
+                <a class="nav-link active" aria-current="page" th:href="@{/viaje}">Viajes</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/mascota}">Mascotas</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/lugare}">Lugares</a>
+            </li>
+        </ul>
+    </div>
+    <div class="container px-4 py-5">
+        <h1 class="pb-2 border-bottom">Lista de mascotas</h1>
+        <div class="d-flex mt-3 mb-4">
+            <a class="btn btn-primary" th:href="@{'/mascota/newForm'}">Nuevo mascota</a>
+        </div>
+        <table class="table">
+            <thead>
+            <tr>
+                <th>#</th>
+                <th>Nombre Mascota</th>
+                <th>Genero</th>
+                <th>Edad</th>
+                <th>Fecha Nacimiento</th>
+                <th>Vacunado</th>
+                <th>Desparasitado</th>
+                <th>Dueño</th>
+                <th></th>
+                <th></th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="mascota, info : ${listaMascotas}">
+                <td th:text="${info.index + 1}"></td>
+                <td th:text="${mascota.nombreMascota}"></td>
+                <td th:text="${mascota.genero}"></td>
+                <td th:text="${mascota.edad}"></td>
+                <td th:text="${mascota.fechaNacimiento}"></td>
+                <td th:text="${mascota.vacunado}"></td>
+                <td th:text="${mascota.desparasitado}"></td>
+                <td th:text="${mascota.personaIdpersona.nombre}"></td>
+                <td><a class="btn btn-primary"
+                       th:href="@{'/mascota/edit?id=' + ${mascota.id}}"><i class="bi bi-pencil-square"></i></a>
+                </td>
+                <td><a class="btn btn-danger"
+                       th:href="@{'/mascota/delete?id=' + ${mascota.id}}"><i class="bi bi-trash3"></i></a>
+                </td>
+                <td><a class="btn btn-success"
+                       th:href="@{'/mascota/otro?id=' + ${mascota.id}}"><i class="bi bi-file-plus"></i></a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</main>
+<script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+</body>
+</html>
