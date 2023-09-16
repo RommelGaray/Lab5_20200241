@@ -1,5 +1,7 @@
 package com.example.lab5gtics.controller;
 
+import com.example.lab5gtics.entity.Mascota;
+import com.example.lab5gtics.entity.Persona;
 import com.example.lab5gtics.repository.LugarRepository;
 import com.example.lab5gtics.repository.MascotaRepository;
 import com.example.lab5gtics.repository.PersonaRepository;
@@ -7,7 +9,12 @@ import com.example.lab5gtics.repository.ViajeRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import java.util.Optional;
 
 @Controller
 @RequestMapping("/persona")
@@ -35,10 +42,26 @@ public class PersonaController {
     @GetMapping("/newForm")
     public String newFormPersona(Model model) {
         model.addAttribute("listaPersonas",personaRepository.findAll());
-        return "mascota/newFrmMascota";
+        return "persona/newFrmPersona";
+    }
+
+    @PostMapping("/save")
+    public String guardarPersona(Persona persona, RedirectAttributes attr) {
+        personaRepository.save(persona);
+        return "redirect:/persona";
     }
 
 
+    @GetMapping("/delete")
+    public String borrarPersona(Model model,
+                                @RequestParam("id") int id,
+                                RedirectAttributes attr) {
+        Optional<Persona> persona = personaRepository.findById(id);
+        if (persona.isPresent()) {
+            personaRepository.deleteById(id);
+        }
+        return "redirect:/persona";
+    }
 
 
 }

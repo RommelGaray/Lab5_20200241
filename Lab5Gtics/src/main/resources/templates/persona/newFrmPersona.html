@@ -43,7 +43,7 @@
                         <label for="tipoPersona" class="form-label">Selector de Personas</label>
                         <select class="form-select" name="tipoPersona" id="tipoPersona">
                             <option th:each="personas: ${listaPersonas}"
-                                    th:text="${personas.nombre}" th:value="${personas.id}">Open this select menu</option>
+                                    th:text="${personas.tipoPersona}" th:value="${personas.id}">Open this select menu</option>
                         </select>
                     </div>
 
